@@ -1,0 +1,14 @@
+* Aubit4GL Docker
+
+Open Source 4gl compiler
+
+Ref: https://www.aubit.com
+Credit: Mike Aubury (Aubit4GL maintainer)
+
+** Test 
+
+: docker run -t -i map7/aubit4gl /bin/bash
+: cd tools/test
+: 4glpc hello.4gl -o hello
+: fcompile form
+: ./hello
