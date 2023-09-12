@@ -3,7 +3,7 @@
 # docker build -t map7/aubit4gl .
 # docker run -t -i map7/aubit4gl /bin/bash
 #
-FROM debian:bullseye
+FROM debian:bookworm
 
 ENV AUBITDIR "/aubit4glsrc"
 ENV LD_LIBRARY_PATH "$LD_LIBRARY_PATH:$AUBITDIR/lib"
