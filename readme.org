@@ -34,3 +34,6 @@ This compose yaml file will help get the compiler to work with PostgreSQL so you
    : docker-compose stop
 
 
+** Build and updating docker
+
+: docker build -t map7/aubit4gl .;docker push map7/aubit4gl:latest
