@@ -1,0 +1,27 @@
+version: "3.3"
+services:
+  docker-aubit4gl:
+    build: .
+    network_mode: host
+    environment:
+      - AUBITDIR=/opt/aubit4gl
+      - LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/aubit4gl/lib:$LIB:$PROD
+      - PATH=$PATH:/opt/aubit4gl/bin
+      - A4GL_UI=TUI
+      - A4GL_SQLTYPE=pg8
+      - A4GL_DBDATE="DMY4"
+      - A4GL_LEXTYPE=C
+      - A4GL_SQLUID=postgres
+      - A4GL_SQLPWD=bucala
+      - TTY=$SSH_TTY
+      - PGDATABASE=pais_legacy
+      - PGPORT=5432
+      - PGHOST=127.0.0.1
+      - PGUSER=postgres
+      - PGPASSWORD=<Enter your password>                  # Change
+    stdin_open: true 
+    tty: true  
+    volumes:
+      - /var/run/postgresql:/var/run/postgresql
+      - /path/to/4gl/code:/path/to/4gl/code               # Change to your 4GL source directory
+      - /path/to/production/code:/path/to/production/code # Change to your compiled area

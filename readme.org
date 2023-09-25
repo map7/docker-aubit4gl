@@ -12,3 +12,25 @@ Credit: Mike Aubury (Aubit4GL maintainer)
 : 4glpc hello.4gl -o hello
 : fcompile form
 : ./hello
+
+** Setup compose
+
+This compose yaml file will help get the compiler to work with PostgreSQL so you can compile your 4GL files which link to your database.
+   
+1. Copy the sample
+   : cp docker-compose.yml.sample docker-compose.yml
+
+2. Change the areas marked
+
+3. Build
+   : docker-compose up -d --build
+
+4. Test
+   : docker-compose exec docker-aubit4gl bash
+
+   Change to your 4gl code and compile, then run.
+
+5. Stop
+   : docker-compose stop
+
+
