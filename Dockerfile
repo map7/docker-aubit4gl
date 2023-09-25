@@ -25,7 +25,7 @@ RUN ./configure
 RUN make
 RUN make install
 
-# For tseting
+# For testing
 WORKDIR $AUBITDIR/tools/test
 RUN 4glpc hello.4gl -o hello
 RUN fcompile form
