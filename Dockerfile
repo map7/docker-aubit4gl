@@ -3,7 +3,7 @@
 # docker build -t map7/aubit4gl .
 # docker run -t -i map7/aubit4gl /bin/bash
 #
-FROM debian:bookworm
+FROM debian:buster
 
 ENV AUBITDIR "/aubit4glsrc"
 ENV LD_LIBRARY_PATH "$LD_LIBRARY_PATH:$AUBITDIR/lib"
@@ -29,5 +29,14 @@ WORKDIR $AUBITDIR/tools/test
 RUN 4glpc hello.4gl -o hello
 RUN fcompile form
 RUN ln -s ../../etc/helpfile.hlp .
+
+RUN apt-get update && apt-get install -y git
+RUN git clone https://github.com/MaxBarraclough/ECPG-Hello-World /ecpg-hello-world
+WORKDIR /ecpg-hello-world
+RUN ./build.sh
+
+RUN wget https://github.com/elisescu/tty-share/releases/download/v2.4.0/tty-share_linux-amd64 && mv tty-share_linux-amd64 /usr/bin/tty-share && chmod +x /usr/bin/tty-share
+
+#COPY with_db.4gl /test.4gl
 
 WORKDIR $AUBITDIR
