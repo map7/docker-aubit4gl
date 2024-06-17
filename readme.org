@@ -5,9 +5,9 @@ Open Source 4gl compiler
 Ref: https://www.aubit.com
 Credit: Mike Aubury (Aubit4GL maintainer)
 
-** Test 
+** Test
 
-: docker run -t -i map7/aubit4gl /bin/bash
+: docker run --name="aubit4gl" --rm -it map7/aubit4gl /bin/bash
 : cd tools/test
 : 4glpc hello.4gl -o hello
 : fcompile form
@@ -16,7 +16,7 @@ Credit: Mike Aubury (Aubit4GL maintainer)
 ** Setup compose
 
 This compose yaml file will help get the compiler to work with PostgreSQL so you can compile your 4GL files which link to your database.
-   
+
 1. Copy the sample
    : cp docker-compose.yml.sample docker-compose.yml
 
@@ -41,7 +41,7 @@ This compose yaml file will help get the compiler to work with PostgreSQL so you
 
 ** todo items
 
-- [ ] Get working with Debian 12 bookworm 
+- [ ] Get working with Debian 12 bookworm
 
   There is an issue when compiling a 4gl file with Postgresql v15
   client connecting to a Postgresql v9 host.
