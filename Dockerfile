@@ -56,4 +56,5 @@ RUN rm -rf /var/lib/apt/lists/*
 # WORKDIR /ecpg-hello-world
 # RUN ./build.sh
 
-WORKDIR $AUBITDIR
+#WORKDIR $AUBITDIR
+WORKDIR /opt/pais_legacy
