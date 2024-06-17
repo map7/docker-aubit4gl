@@ -39,6 +39,10 @@ WORKDIR ghostpdl-10.03.1
 RUN ./configure
 RUN make -j4
 RUN make install
+
+# Printer tools
+RUN apt-get update && apt-get install -y cups-client curl iputils-ping
+
 # # For debugging
 # RUN apt-get update && apt-get install -y git
 # RUN git clone https://github.com/MaxBarraclough/ECPG-Hello-World /ecpg-hello-world
