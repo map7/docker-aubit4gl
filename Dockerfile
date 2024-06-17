@@ -30,6 +30,15 @@ RUN 4glpc hello.4gl -o hello
 RUN fcompile form
 RUN ln -s ../../etc/helpfile.hlp .
 
+# Install gpcl6
+RUN wget https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10031/ghostpdl-10.03.1.tar.gz
+#RUN wget https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10012/ghostpdl-10.01.2.tar.gz
+
+RUN tar xvf ghostpdl-10.03.1.tar.gz
+WORKDIR ghostpdl-10.03.1
+RUN ./configure
+RUN make -j4
+RUN make install
 # # For debugging
 # RUN apt-get update && apt-get install -y git
 # RUN git clone https://github.com/MaxBarraclough/ECPG-Hello-World /ecpg-hello-world
