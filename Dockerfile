@@ -14,13 +14,14 @@ ENV A4GL_DBDATE "DMY4"
 
 RUN apt-get update && apt-get install -y wget build-essential autoconf bison gdb libncurses5 postgresql bash libncurses5-dev libncursesw5-dev pkg-config flex libecpg-dev libglib2.0-dev doxygen splint expect texi2html libgmp3-dev perl-doc gawk libsigsegv2 libglade2-dev ruby less
 
+# Install aubi4gl
 RUN wget https://downloads.sourceforge.net/project/aubit4gl/Aubit%20Reasonably%20Stable%20Source/1.6.1/aubit4glsrc.1.6.1.tar.gz
 
 RUN tar xf aubit4glsrc.1.6.1.tar.gz
 
 WORKDIR $AUBITDIR
 RUN ./configure
-RUN make
+RUN make # NOTE: This has to be compiled in a single process
 RUN make install
 
 # For testing
