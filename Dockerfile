@@ -43,6 +43,13 @@ RUN make install
 # Printer tools
 RUN apt-get update && apt-get install -y cups-client curl iputils-ping
 
+
+# Email tools
+RUN apt-get update && apt-get install -y ruby-dev
+RUN gem install mailfactory sqlite3
+RUN gem install byebug
+
+RUN rm -rf /var/lib/apt/lists/*
 # # For debugging
 # RUN apt-get update && apt-get install -y git
 # RUN git clone https://github.com/MaxBarraclough/ECPG-Hello-World /ecpg-hello-world
