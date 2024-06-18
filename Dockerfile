@@ -3,7 +3,7 @@
 # docker build -t map7/aubit4gl .
 # docker run -t -i map7/aubit4gl /bin/bash
 #
-FROM debian:bullseye
+FROM debian:buster
 
 ENV AUBITDIR "/aubit4glsrc"
 ENV LD_LIBRARY_PATH "$LD_LIBRARY_PATH:$AUBITDIR/lib"
@@ -46,7 +46,9 @@ RUN apt-get update && apt-get install -y cups-client curl iputils-ping
 
 # Email tools
 RUN apt-get update && apt-get install -y ruby-dev
-RUN gem install mailfactory sqlite3
+RUN gem install mailfactory
+RUN apt-get update && apt-get install -y sqlite3 libsqlite3-dev
+RUN gem install sqlite3 -v 1.4.4
 RUN gem install byebug
 
 RUN rm -rf /var/lib/apt/lists/*

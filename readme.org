@@ -40,11 +40,21 @@ This compose yaml file will help get the compiler to work with PostgreSQL so you
 
 
 ** todo items
+   :PROPERTIES:
+   :CREATED:  [2024-06-18 Tue 13:07]
+   :END:
 
-- [ ] Get working with Debian 12 bookworm
+- [ ] Upgrade Debian
 
-  There is an issue when compiling a 4gl file with Postgresql v15
-  client connecting to a Postgresql v9 host.
+  - [ ] Debian 11 bullseye
+
+    1. Compiling using 'fl' doesn't work as it truncates the line, test with pappo00a
+       This is to do with the gcc version truncating the line.
+
+  - [ ] Debian 12 bookworm
+
+    There is an issue when compiling a 4gl file with Postgresql v15
+    client connecting to a Postgresql v9 host.
 
 - [ ] Put option in to use the latest aubit from SVN repo
   https://sourceforge.net/p/aubit4gl/aubit4gl_code/HEAD/tree/aubit4glsrc/trunk/
