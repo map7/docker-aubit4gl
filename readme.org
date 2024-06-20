@@ -23,21 +23,43 @@ This compose yaml file will help get the compiler to work with PostgreSQL so you
 2. Change the areas marked
 
 3. Build
-   : docker-compose up -d --build
+   : docker compose build
 
 4. Test
-   : docker-compose exec docker-aubit4gl bash
+   : docker compose exec docker-aubit4gl bash
 
    Change to your 4gl code and compile, then run.
 
 5. Stop
-   : docker-compose stop
+   : docker compose stop
 
 
 ** Build and updating docker
 
 : docker build -t map7/aubit4gl .;docker push map7/aubit4gl:latest
 
+
+** Running command
+
+- Running bash   
+  : docker compose -f /home/map7/code/docker-aubit4gl/docker-compose.yml run --rm docker-aubit4gl bash
+
+- Running PostgreSQL commands
+
+  - Create pais_legacy
+    : docker compose -f /home/map7/code/docker-aubit4gl/docker-compose.yml run --rm docker-aubit4gl createdb -p5434 pais_legacy
+
+  - Dump pais_legacy
+    : docker compose -f /home/map7/code/docker-aubit4gl/docker-compose.yml run --rm docker-aubit4gl pg_dump pais_legacy > /home/map7/pais_legacy.pg_dump
+
+  - Drop pais_legacy
+    : docker compose -f /home/map7/code/docker-aubit4gl/docker-compose.yml run --rm docker-aubit4gl dropdb -p5434 pais_legacy
+
+  - Restore pais_legacy
+    : docker compose -f /home/map7/code/docker-aubit4gl/docker-compose.yml run --rm docker-aubit4gl createdb -p5434 pais_legacy
+
+  - Access pais_legacy
+    : docker compose -f /home/map7/code/docker-aubit4gl/docker-compose.yml run --rm docker-aubit4gl psql -p5434 pais_legacy
 
 ** todo items
    :PROPERTIES:
