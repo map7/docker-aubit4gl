@@ -50,6 +50,8 @@ RUN gem install mailfactory
 RUN apt-get update && apt-get install -y sqlite3 libsqlite3-dev
 RUN gem install sqlite3 -v 1.4.4
 RUN gem install byebug
+RUN gem install colorize -v 0.8.1
+RUN gem install ruby-progressbar
 
 RUN rm -rf /var/lib/apt/lists/*
 # # For debugging
