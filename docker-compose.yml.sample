@@ -1,27 +1,55 @@
-version: "3.3"
+name: aubit4gl
 services:
+  db:
+    image: postgres:9.6.19-alpine
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=      # change
+    ports:
+      - '5434:5432'             # HOST:Container
+    volumes: 
+      - postgres-data:/var/lib/postgresql/data
+      
   docker-aubit4gl:
     build: .
     network_mode: host
     environment:
+      - DEVEL=/home/map7/code/pais_legacy
+      - PROD=/opt/pais_legacy
+      - LIB=$DEVEL/lib/lib.RDS
       - AUBITDIR=/opt/aubit4gl
-      - LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/aubit4gl/lib:$LIB:$PROD
-      - PATH=$PATH:/opt/aubit4gl/bin
+      - AUBITSCRIPTS=/home/map7/code/pais_legacy/scripts/aubit_pais
+      - LD_LIBRARY_PATH=/opt/aubit4gl/lib:$LIB:$PROD
+      - PATH=$PATH:/opt/aubit4gl/bin:/home/map7/code/pais_legacy/scripts/aubit_pais
       - A4GL_UI=TUI
       - A4GL_SQLTYPE=pg8
       - A4GL_DBDATE="DMY4"
       - A4GL_LEXTYPE=C
+      - TTY=$TTY
       - A4GL_SQLUID=postgres
-      - A4GL_SQLPWD=bucala
-      - TTY=$SSH_TTY
+      - A4GL_SQLPWD=            # change
       - PGDATABASE=pais_legacy
-      - PGPORT=5432
+      - PGPORT=5434             # Use docker postgreSQL instead of system
       - PGHOST=127.0.0.1
       - PGUSER=postgres
-      - PGPASSWORD=<Enter your password>                  # Change
+      - PGPASSWORD=             # change
+      - LOGNAME=$LOGNAME
     stdin_open: true 
-    tty: true  
-    volumes:
-      - /var/run/postgresql:/var/run/postgresql
-      - /path/to/4gl/code:/path/to/4gl/code               # Change to your 4GL source directory
-      - /path/to/production/code:/path/to/production/code # Change to your compiled area
+    tty: true
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:                                                    # change the following
+      - /home/map7/code/pais_legacy:/home/map7/code/pais_legacy # DEVEL
+      - /home/map7:/home/map7                                   # Required for dump
+      - /home/tram:/home/tram                                   # NOT Required
+      - /home/pais_output:/home/pais_output                     # File output
+      - /opt/pais_legacy:/opt/pais_legacy                       # PROD
+volumes:
+  postgres-data:
