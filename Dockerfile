@@ -42,6 +42,9 @@ RUN gem install sqlite3 -v 1.4.4
 RUN gem install colorize -v 0.8.1
 RUN gem install byebug ruby-progressbar mailfactory
 
+RUN apt-get install -y texlive-extra-utils
+RUN apt-get install -y poppler-utils
+
 RUN rm -rf /var/lib/apt/lists/*
 # # For debugging
 # RUN apt-get update && apt-get install -y git
