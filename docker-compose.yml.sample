@@ -2,6 +2,7 @@ name: aubit4gl
 services:
   db:
     image: postgres:9.6.19-alpine
+    command: -c 'max_connections=500'
     restart: always
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
